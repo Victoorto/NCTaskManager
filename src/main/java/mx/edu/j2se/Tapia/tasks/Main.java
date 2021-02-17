@@ -2,6 +2,7 @@ package mx.edu.j2se.Tapia.tasks;
 
 public class Main {
 	public static void main(String[] args) {
+	    /*
 		Persona estudianteNC = new Persona();
 		estudianteNC.setEdad(18);
 		estudianteNC.setNombre("Eduardo");
@@ -13,6 +14,10 @@ public class Main {
 		estudianteNC2.setEdad(17);
 		String loDejaron2 = estudianteNC2.loDejanEntrarAlBar();
 		System.out.println(estudianteNC2.nombre + " : "  + loDejaron2);
+        */
+		Task task1 = new Task( "ir al super", 32, 25, 80);
+		System.out.println(task1.getTitle() + ' ' + task1.getTime() + ' ' + task1.getInterval());
+
 	}
 
 }

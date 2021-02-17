@@ -7,6 +7,7 @@ public class Persona{
 	Float altura;
 	String sexo;
 
+
 	public String getNombre(){
 		return this.nombre;
 	}
