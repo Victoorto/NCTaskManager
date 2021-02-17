@@ -3,11 +3,8 @@ package mx.edu.j2se.Tapia.tasks;
 public class Task {
 
     String title;
-    int time;
-    int start;
-    int end;
-    int interval;
-    boolean active;
+    int time, start, end, interval;
+    boolean active, repeated;
 
 
     public String getTitle(){
@@ -15,20 +12,30 @@ public class Task {
     }
 
     public int getTime() {
-        if(interval > 0){
-            return start;  //Si la tarea es repetitiva regresa en tiempo de inicio de la repeticion
+        if(interval != 0){
+            return start;
         }
         else{
-            return time; //si no es repetitiva regresa solo el tiempo
+            return time;
         }
     }
 
     public int getStart() {
-        return start;
+        if(interval == 0){
+            return time;
+        }
+        else{
+            return start;
+        }
     }
 
     public int getEnd() {
-        return end;
+        if(interval == 0){
+            return time;
+        }
+        else{
+            return end;
+        }
     }
 
     public int getInterval() {
@@ -54,6 +61,20 @@ public class Task {
             this.start = 0;
             this.end = 0;
             this.time = time;
+            setRepeated(false);
+        }
+        else{
+
+            this.time = time;
+        }
+
+    }
+    public void setTime(int start, int end, int interval) {
+        if (interval == 0){
+            this.interval = interval;
+            this.start = start;
+            this.end = end;
+            setRepeated(true);
         }
         else{
 
@@ -78,9 +99,22 @@ public class Task {
         this.active = active;
     }
 
+    public void setRepeated(boolean repeated) {
+        this.repeated = repeated;
+    }
+
+    public boolean isRepeated() {
+        return repeated;
+    }
+
+
+    /* Constructores */
     public Task(String title, int time){
+
         this.title = title;
         this.time = time;
+        setRepeated(false);
+
     }
 
     public Task(String title, int start, int end, int interval){
@@ -89,5 +123,7 @@ public class Task {
         this.start = start;
         this.end = end;
         this.interval = interval;
+        setRepeated(true);
+
     }
 }

@@ -15,8 +15,8 @@ public class Main {
 		String loDejaron2 = estudianteNC2.loDejanEntrarAlBar();
 		System.out.println(estudianteNC2.nombre + " : "  + loDejaron2);
         */
-		Task task1 = new Task( "ir al super", 32, 25, 80);
-		System.out.println(task1.getTitle() + ' ' + task1.getTime() + ' ' + task1.getInterval());
+		Task task1 = new Task( "ir al super", 32);
+		System.out.println(task1.getTitle() + ' ' + task1.getTime() + ' ' + task1.isRepeated() + task1.getInterval());
 
 	}
 
