@@ -48,6 +48,7 @@ public class Task {
     }
 
     public boolean isActive() {
+
         return active;
     }
 
@@ -97,6 +98,7 @@ public class Task {
 
     public void setActive(boolean active) {
         this.active = active;
+
     }
 
     public void setRepeated(boolean repeated) {
@@ -106,6 +108,16 @@ public class Task {
     public boolean isRepeated() {
         return repeated;
     }
+
+    public int nextTime(int current){
+        int nextStart = current + this.interval;
+        if(nextStart > this.end){
+            return -1
+        }else{
+            return nextStart
+        }
+    }
+
 
 
     /* Constructores */
