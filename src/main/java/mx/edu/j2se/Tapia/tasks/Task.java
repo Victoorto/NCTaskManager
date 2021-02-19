@@ -11,44 +11,31 @@ public class Task {
         return this.title;
     }
 
-    public int getTime() {
-        if(interval != 0){
-            return start;
-        }
-        else{
-            return time;
-        }
+    public int getTime() {     //getTime y getStartTime son la misma, pero el documento requiere las dos
+
+        int rep = repeated ? start : time;
+        return rep;
     }
 
-    public int getStart() {
-        if(interval == 0){
-            return time;
-        }
-        else{
-            return start;
-        }
+    public int getStartTime() {
+
+        int rep = repeated ? start : time;
+        return rep;
     }
 
-    public int getEnd() {
-        if(interval == 0){
-            return time;
-        }
-        else{
-            return end;
-        }
+    public int getEndTime() {
+
+        int rep = repeated ? end : time;
+        return rep;
     }
 
     public int getInterval() {
-        if (interval != 0){
-            return interval;
-        }
-        else{
-            return 0;
-        }
+
+        int inter = repeated ? interval : 0;
+        return inter;
     }
 
     public boolean isActive() {
-
         return active;
     }
 
@@ -57,7 +44,7 @@ public class Task {
     }
 
     public void setTime(int time) {
-        if (interval != 0){
+        if (repeated){
             this.interval = 0;
             this.start = 0;
             this.end = 0;
@@ -71,15 +58,17 @@ public class Task {
 
     }
     public void setTime(int start, int end, int interval) {
-        if (interval == 0){
+        if (!repeated){
             this.interval = interval;
             this.start = start;
             this.end = end;
+            this.time = 0;
             setRepeated(true);
-        }
-        else{
+        }else{
 
-            this.time = time;
+            this.interval = interval;
+            this.start = start;
+            this.end = end;
         }
 
     }
@@ -109,33 +98,31 @@ public class Task {
         return repeated;
     }
 
-    public int nextTime(int current){
-        int nextStart = current + this.interval;
-        if(nextStart > this.end){
-            return -1
+    public int nextTimeAfter(int current){
+        int nextStart = current + interval;
+        if(nextStart > end){
+            return -1;
         }else{
-            return nextStart
+            return nextStart;
         }
     }
-
 
 
     /* Constructores */
     public Task(String title, int time){
 
-        this.title = title;
-        this.time = time;
         setRepeated(false);
-
+        setTitle(title);
+        setTime(time);
     }
 
     public Task(String title, int start, int end, int interval){
 
-        this.title = title;
-        this.start = start;
-        this.end = end;
-        this.interval = interval;
         setRepeated(true);
+        setTitle(title);
+        setStart(start);
+        setEnd(end);
+        setInterval(interval);
 
     }
 }

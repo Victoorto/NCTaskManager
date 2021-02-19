@@ -16,8 +16,13 @@ public class Main {
 		System.out.println(estudianteNC2.nombre + " : "  + loDejaron2);
         */
 
-		Task task1 = new Task( "ir al super", 32);
-		System.out.println(task1.getTitle() + ' ' + task1.getTime() + ' ' + task1.isRepeated() + task1.getInterval());
+		Task task1 = new Task( "ir al super", 32 );
+		System.out.println(task1.getTitle() + ' ' + task1.getTime() + ' ' + task1.isRepeated() + ' ' + task1.getInterval());
+
+		Task task2 = new Task( "ir al super", 50, 25, 60 );
+		System.out.println(task2.getTitle() + ' ' + task2.getTime() + ' ' + task2.isRepeated() + ' ' + task2.getInterval());
+		task2.setTime(70);
+		System.out.println(task2.getTitle() + ' ' + task2.getTime() + ' ' + task2.isRepeated() + ' ' + task2.getInterval());
 
 	}
 
