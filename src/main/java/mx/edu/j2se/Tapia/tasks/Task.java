@@ -11,7 +11,8 @@ public class Task {
         return this.title;
     }
 
-    public int getTime() {     //getTime y getStartTime son la misma, pero el documento requiere las dos
+    //getTime y getStartTime son lo mismo, pero el documento requiere las dos
+    public int getTime() {
 
         int rep = repeated ? start : time;
         return rep;
