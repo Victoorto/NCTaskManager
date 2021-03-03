@@ -26,7 +26,7 @@ public class Main {
 
 
 
-		Task task2 = new Task( "Comprar el super", 50, 25, 60 );
+		Task task2 = new Task( "Comprar el super", 50, 200, 60 );
 		/*System.out.println(task2.getTitle() + ' ' + task2.getTime() + ' ' + task2.isRepeated() + ' ' + task2.getInterval());
 		task2.setTime(70);
 		System.out.println(task2.getTitle() + ' ' + task2.getTime() + ' ' + task2.isRepeated() + ' ' + task2.getInterval());
@@ -37,19 +37,23 @@ public class Main {
         System.out.println(ArrayTaskList.getSize());
         Task tarea1 = ArrayTaskList.getTask(1);
         Task tarea2 = ArrayTaskList.getTask(2);
-        Task tarea3 = ArrayTaskList.getTask(3);
+        Task[] tarea3 = ArrayTaskList.incoming(30,200);
         System.out.println(tarea1.getTitle());
         System.out.println(tarea2.getTitle());
-        System.out.println(tarea3.getTitle());
+        System.out.println(tarea3[0].getTitle());
 
 
-        System.out.println(ArrayTaskList.remove(task1));
+
+
+        /*System.out.println(ArrayTaskList.remove(task1));
         System.out.println(ArrayTaskList.getSize());
         Task tarea4 = ArrayTaskList.getTask(1);
         Task tarea5 = ArrayTaskList.getTask(2);
 
         System.out.println(tarea1.getTitle());
         System.out.println(tarea2.getTitle());
+      */
+
 
 
 	}

@@ -6,6 +6,7 @@ public class ArrayTaskList {
 
     static Task arrayTask[] = new Task[0]; //Inicia en 0 por que no hay ninguna Task por el momento
     static boolean elim;
+    static Task arrayTaskNext[] = new Task[0];
 
     //Agrega una task al Array haciendo una copia de este agregando un espacio y la nueva tarea
     public static void add(Task task){
@@ -19,7 +20,6 @@ public class ArrayTaskList {
     }
     //Regresa el numero de tareas en el Array
     public static int getSize(){
-
         return arrayTask.length;
     }
 
@@ -27,12 +27,6 @@ public class ArrayTaskList {
     public static Task getTask(int index){
         return arrayTask[index - 1];
     }
-   /*
-    public static Object getTask(int index){
-        Object tarea = index > arrayTask.length ? "No hay una tarea en ese lugar ": arrayTask[index];
-        return tarea;
-    }
-    */
 
     public static boolean remove(Task task){
 
@@ -64,6 +58,31 @@ public class ArrayTaskList {
 
 
         return elim;
+    }
+
+    public static Task[] incoming(int from, int to){
+
+        for(int i =0;i< arrayTask.length;i++){
+
+            int start_int = arrayTask[i].getStartTime() + arrayTask[i].getInterval();
+            int start =arrayTask[i].getStartTime();
+            int end = arrayTask[i].getEndTime();
+
+            if((from <= start_int)&&(start_int <=to)||((from <= start) && (end<= to))){
+
+                Task arrayTask1[]=new Task[1];
+                arrayTask1[0]= arrayTask[i];
+
+                arrayTaskNext = Arrays.copyOf(arrayTaskNext, arrayTaskNext.length + 1);
+                arrayTaskNext[arrayTaskNext.length - 1] = arrayTask1[0];
+                System.out.println("Task incoming");
+                continue;
+            }
+
+        }
+
+
+        return arrayTaskNext;
     }
 
 }
