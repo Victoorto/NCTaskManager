@@ -25,7 +25,13 @@ public class ArrayTaskList {
 
     //Regresa la tarea en el lugar indicado
     public static Task getTask(int index){
-        return arrayTask[index - 1];
+        try{
+            return arrayTask[index - 1];
+        }catch(IndexOutOfBoundsException i){
+            System.out.println("Excede el tamaño de la lista");
+            return null;
+        }
+
     }
 
     public static boolean remove(Task task){
@@ -76,7 +82,6 @@ public class ArrayTaskList {
                 arrayTaskNext = Arrays.copyOf(arrayTaskNext, arrayTaskNext.length + 1);
                 arrayTaskNext[arrayTaskNext.length - 1] = arrayTask1[0];
                 System.out.println("Task incoming");
-                continue;
             }
 
         }

@@ -112,18 +112,46 @@ public class Task {
     /* Constructores */
     public Task(String title, int time){
 
-        setRepeated(false);
-        setTitle(title);
-        setTime(time);
+        try{
+            if(time <= 0){
+
+                throw new IllegalArgumentException("El valor tiene que ser positivo");
+            }
+
+            setRepeated(false);
+            setTitle(title);
+            setTime(time);
+
+        }catch(IllegalArgumentException i){
+            System.out.println("El valor tiene que ser positivo");
+            setTitle(null);
+            setTime(0);
+        }
+
     }
 
     public Task(String title, int start, int end, int interval){
 
-        setRepeated(true);
-        setTitle(title);
-        setStart(start);
-        setEnd(end);
-        setInterval(interval);
+        try{
+            if(start <= 0 || end  <= 0 || end < start || interval <=0){
+
+                throw new IllegalArgumentException("El valor tiene que ser positivo");
+            }
+            setRepeated(true);
+            setTitle(title);
+            setStart(start);
+            setEnd(end);
+            setInterval(interval);
+
+        }catch(IllegalArgumentException i){
+            System.out.println("El valor de inicio, final o intervalo no puede ser menor o igual a 0");
+            setRepeated(false);
+            setTitle(null);
+            setStart(0);
+            setEnd(0);
+            setInterval(0);
+        }
+
 
     }
 }

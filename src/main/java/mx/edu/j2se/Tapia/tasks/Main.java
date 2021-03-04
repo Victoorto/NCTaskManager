@@ -33,14 +33,15 @@ public class Main {
           */
         ArrayTaskList.add(task1);
         ArrayTaskList.add(task2);
-        ArrayTaskList.add(task1);
-        System.out.println(ArrayTaskList.getSize());
+
+        //ArrayTaskList.add(task1);
+        System.out.println(ArrayTaskList.arrayTask[0].getTitle());
         Task tarea1 = ArrayTaskList.getTask(1);
-        Task tarea2 = ArrayTaskList.getTask(2);
-        Task[] tarea3 = ArrayTaskList.incoming(30,200);
+        Task tarea2 = ArrayTaskList.getTask(3);
+       // Task[] tarea3 = ArrayTaskList.incoming(30,200);
         System.out.println(tarea1.getTitle());
-        System.out.println(tarea2.getTitle());
-        System.out.println(tarea3[0].getTitle());
+       // System.out.println(tarea2.getTitle());
+        //System.out.println(tarea3[0].getTitle());
 
 
 
