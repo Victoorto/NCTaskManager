@@ -25,22 +25,6 @@ public class Circle {
         return area;
     }
 
-    public int biggestCircle(){
-        int index = 0;
-        int big = 0;
-        for(int i =0;i < radius2.length;i++){
-            if(radius2[i]> big){
-                index = i;
-                big = radius2[i];
-            }
-        }
-        double rad = Math.pow(radius2[index], 2);
-        double area = ((pi) * (rad));
-        System.out.println(area);
-        return index;
-
-    }
-
     //Set
     public void setRadius(int radius) {
         try{
@@ -58,8 +42,6 @@ public class Circle {
     public void setRadius2(int[] radius2) {
         this.radius2 = radius2;
     }
-
-
 
 
 
@@ -82,23 +64,6 @@ public class Circle {
         }
 
     }
-    public Circle(int [] radius){
-
-        try{
-        for(int rad: radius){
-                if(rad <= 0){
-                    throw new IllegalArgumentException();
-                }
-                setRadius2(radius);
-
-        }}catch(IllegalArgumentException e){
-                System.out.println("El valor tiene que ser positivo y diferente de 0");
-                radius2 = new int[radius.length];
-                setRadius2(radius2);
-            }
-
-        }
-
 
 }
 

@@ -8,12 +8,26 @@ public class Evaluation1 {
         Circle circulo1 = new Circle(1);
         System.out.println(circulo1.getArea());
 
-       int [] circulos = {10 ,2 ,15, 20, 50, 5, 16};
+       int [] circulos = {10 ,2 ,15, 20, 6, 5, 16};
 
-       Circle circulos2 = new Circle(circulos);
-       //System.out.println(circulos2.getRadius2());
-        System.out.println(circulos2.biggestCircle()); //imprime el area y el index del mayor circulo
+       int mayorArea =  biggestCircle(circulos);
+       System.out.println(mayorArea);
 
+
+    }
+
+    public static int biggestCircle(int [] circulos){
+        int index = 0;
+        int big = 0;
+        for(int i =0;i < circulos.length;i++){
+            if(circulos[i]> big){
+                index = i;
+                big = circulos[i];
+            }
+        }
+        Circle circulo2 = new Circle(big);
+        System.out.println(circulo2.getArea());
+        return index;
     }
 
 
