@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 public class ArrayTaskList {
 
-    static Task arrayTask[] = new Task[0]; //Inicia en 0 por que no hay ninguna Task por el momento
+    static Task[] arrayTask = new Task[0]; //Inicia en 0 por que no hay ninguna Task por el momento
     static boolean elim;
-    static Task arrayTaskNext[] = new Task[0];
+    static Task[] arrayTaskNext = new Task[0];
 
     //Agrega una task al Array haciendo una copia de este agregando un espacio y la nueva tarea
     public static void add(Task task){
@@ -33,7 +33,7 @@ public class ArrayTaskList {
         }
 
     }
-
+    //Remove the Task indicated and returns true if it was successful
     public static boolean remove(Task task){
 
         Task arrayTask1[]=new Task[1];
@@ -66,6 +66,7 @@ public class ArrayTaskList {
         return elim;
     }
 
+    //Look fo the Task that are executed in certain period of time
     public static Task[] incoming(int from, int to){
 
         for(int i =0;i< arrayTask.length;i++){

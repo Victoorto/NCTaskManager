@@ -31,13 +31,13 @@ public class Main {
 		task2.setTime(70);
 		System.out.println(task2.getTitle() + ' ' + task2.getTime() + ' ' + task2.isRepeated() + ' ' + task2.getInterval());
           */
-        ArrayTaskList.add(task1);
-        ArrayTaskList.add(task2);
+        LinkedTaskList.add(task1);
+        LinkedTaskList.add(task2);
 
         //ArrayTaskList.add(task1);
-        System.out.println(ArrayTaskList.arrayTask[0].getTitle());
-        Task tarea1 = ArrayTaskList.getTask(1);
-        Task tarea2 = ArrayTaskList.getTask(3);
+        System.out.println(LinkedTaskList.Tasks.get(1).getTitle());
+        Task tarea1 = LinkedTaskList.getTask(1);
+        //Task tarea2 = ArrayTaskList.getTask(3);
        // Task[] tarea3 = ArrayTaskList.incoming(30,200);
         System.out.println(tarea1.getTitle());
        // System.out.println(tarea2.getTitle());

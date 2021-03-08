@@ -6,28 +6,28 @@ public class Task {
     int time, start, end, interval;
     boolean active, repeated;
 
-
+    //NullPointerException is a run-time exception which is not recommended to catch it, but instead avoid it:
     public String getTitle(){
+
         return this.title;
+
     }
 
     //getTime y getStartTime son lo mismo, pero el documento requiere las dos
     public int getTime() {
 
-        int rep = repeated ? start : time;
-        return rep;
+        return repeated ? start : time;
+
     }
 
     public int getStartTime() {
 
-        int rep = repeated ? start : time;
-        return rep;
+        return repeated ? start : time;
     }
 
     public int getEndTime() {
 
-        int rep = repeated ? end : time;
-        return rep;
+        return repeated ? end : time;
     }
 
     public int getInterval() {
@@ -41,6 +41,7 @@ public class Task {
     }
 
     public void setTitle(String title) {
+
         this.title = title;
     }
 
@@ -113,9 +114,9 @@ public class Task {
     public Task(String title, int time){
 
         try{
-            if(time <= 0){
+            if(time <= 0 ||  title == null){
 
-                throw new IllegalArgumentException("El valor tiene que ser positivo");
+                throw new IllegalArgumentException();
             }
 
             setRepeated(false);
@@ -133,9 +134,9 @@ public class Task {
     public Task(String title, int start, int end, int interval){
 
         try{
-            if(start <= 0 || end  <= 0 || end < start || interval <=0){
+            if(start <= 0 || end  <= 0 || end < start || interval <=0 ||  title == null){
 
-                throw new IllegalArgumentException("El valor tiene que ser positivo");
+                throw new IllegalArgumentException();
             }
             setRepeated(true);
             setTitle(title);
