@@ -17,7 +17,6 @@ public class Task {
     public int getTime() {
 
         return repeated ? start : time;
-
     }
 
     public int getStartTime() {
@@ -32,8 +31,7 @@ public class Task {
 
     public int getInterval() {
 
-        int inter = repeated ? interval : 0;
-        return inter;
+        return repeated ? interval : 0;
     }
 
     public boolean isActive() {

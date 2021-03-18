@@ -1,20 +1,9 @@
 package mx.edu.j2se.Tapia.tasks;
 
+import java.util.List;
+
 public class Main {
 	public static void main(String[] args) {
-	    /*
-		Persona estudianteNC = new Persona();
-		estudianteNC.setEdad(18);
-		estudianteNC.setNombre("Eduardo");
-		String loDejaron = estudianteNC.loDejanEntrarAlBar();
-		System.out.println(estudianteNC.nombre + " : "  + loDejaron);
-
-		Persona estudianteNC2 = new Persona();
-		estudianteNC2.setNombre("Arturo");
-		estudianteNC2.setEdad(17);
-		String loDejaron2 = estudianteNC2.loDejanEntrarAlBar();
-		System.out.println(estudianteNC2.nombre + " : "  + loDejaron2);
-        */
 
 		Task task1 = new Task( "Salir con los amigos", 32 );
 		/*System.out.println(task1.getTitle() + ' ' + task1.getTime() + ' ' + task1.isRepeated() + ' ' + task1.getInterval());
@@ -31,21 +20,24 @@ public class Main {
 		task2.setTime(70);
 		System.out.println(task2.getTitle() + ' ' + task2.getTime() + ' ' + task2.isRepeated() + ' ' + task2.getInterval());
           */
-        LinkedTaskList.add(task1);
-        LinkedTaskList.add(task2);
+          LinkedTaskList list = new LinkedTaskList();
+
+          LinkedTaskList.add(list, task1);
+          LinkedTaskList.add(list, task2);
+          LinkedTaskList.add(list, task1);
+          LinkedTaskList.add(list, task2);
 
         //ArrayTaskList.add(task1);
-        System.out.println(LinkedTaskList.Tasks.get(1).getTitle());
-        Task tarea1 = LinkedTaskList.getTask(1);
-        //Task tarea2 = ArrayTaskList.getTask(3);
-       // Task[] tarea3 = ArrayTaskList.incoming(30,200);
-        System.out.println(tarea1.getTitle());
-       // System.out.println(tarea2.getTitle());
-        //System.out.println(tarea3[0].getTitle());
+        //System.out.println(LinkedTaskList.Tasks.get(1).getTitle());
+        Task tarea1 = LinkedTaskList.getTask(4);
 
+        System.out.println(LinkedTaskList.getSize());
+        //System.out.println(LinkedTaskList.remove(tarea1));
+        System.out.println(LinkedTaskList.getSize());
 
-
-
+        List list3 = LinkedTaskList.incoming(30,200);
+        Task tarea = (Task) list3.get(1);
+        System.out.println(tarea.getTitle());
         /*System.out.println(ArrayTaskList.remove(task1));
         System.out.println(ArrayTaskList.getSize());
         Task tarea4 = ArrayTaskList.getTask(1);
