@@ -5,15 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 //import java.util.LinkedList;
-public class LinkedTaskList {
+public class LinkedTaskList extends AbstractTaskList {
 
+    Node head;
 
-    //Create a new Linked list
-    //static LinkedList<Task> Tasks = new LinkedList<>(); // LinkedList<Type of data that is going to contain String,int,objects>
-    static Node head;
-
-    //constructor for the next node to add to the linked list
-    static class Node extends LinkedTaskList {
+    class Node {
         Task data;
         Node next;
 
@@ -23,26 +19,24 @@ public class LinkedTaskList {
         }
     }
 
-    //Add a Task to the linked list
-    public static void add(LinkedTaskList list, Task data) {
+    public void add(Task data) {
         Node new_node = new Node(data);
         new_node.next = null;
 
-        if (list.head == null) {
-            list.head = new_node;
+        if (head == null) {
+            head = new_node;
         } else {
-            Node last = list.head;
+            Node last = head;
             while (last.next != null) {
                 last = last.next;
             }
             last.next = new_node;
+            System.out.println("Task added");
         }
 
     }
 
-
-    //Return the length of the Linked list
-    public static int getSize(){
+    public int getSize(){
         Node temp = head;
         int size = 0;
         while(temp != null){
@@ -51,10 +45,9 @@ public class LinkedTaskList {
         }
 
         return size;
-        }
+    }
 
-    //Return the Task requested
-    public static Task getTask(int index){
+    public Task getTask(int index){
         Node temp = head;
         int size = 0;
         while(temp != null){
@@ -68,8 +61,7 @@ public class LinkedTaskList {
         return null;
     }
 
-    //Remove the Task indicated and returns true if it was successful
-    public static boolean remove(Task task){
+    public boolean remove(Task task){
         Node temp = head;
         Node prev = null;
         while(temp != null && temp.data != task){
@@ -84,15 +76,13 @@ public class LinkedTaskList {
 
     }
 
-
-    //Look for the Task that are executed in certain period of time
-    public static List incoming(int from, int to){
+    public AbstractTaskList  incoming(int from, int to) {
 
         Node temp = head;
         Node prev = null;
-        List<Task> list2 = new ArrayList<>();
-        //LinkedTaskList list2 = new LinkedTaskList();
-        while(temp != null){
+        //List<Task> list2 = new ArrayList<>();
+        LinkedTaskList list2 = new LinkedTaskList();
+        while (temp != null) {
 
             int start_int = temp.data.getStartTime() + temp.data.getInterval();
             int start = temp.data.getStartTime();
@@ -110,25 +100,7 @@ public class LinkedTaskList {
         }
 
         return list2;
-
-
-       /* for (Task task : Tasks) {
-
-            int start_int = task.getStartTime() + task.getInterval();
-            int start = task.getStartTime();
-            int end = task.getEndTime();
-
-            if ((from <= start_int) && (start_int <= to) || ((from <= start) && (end <= to))) {
-
-                Tasks2.add(task);
-                System.out.println("Task incoming");
-            }
-
-        }
-        return Tasks2;*/
-
     }
-
 
 
 
