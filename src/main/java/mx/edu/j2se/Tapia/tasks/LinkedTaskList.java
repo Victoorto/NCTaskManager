@@ -1,9 +1,6 @@
 package mx.edu.j2se.Tapia.tasks;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 //import java.util.LinkedList;
 public class LinkedTaskList extends AbstractTaskList {
 
