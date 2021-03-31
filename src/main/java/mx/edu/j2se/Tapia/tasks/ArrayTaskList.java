@@ -1,8 +1,10 @@
 package mx.edu.j2se.Tapia.tasks;
 
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.function.Consumer;
 
-public class ArrayTaskList extends AbstractTaskList {
+public  class ArrayTaskList extends AbstractTaskList {
 
     Task[] arrayTasks = new Task[0];
     Task[] arrayTasksNext = new Task[0];
@@ -85,8 +87,75 @@ public class ArrayTaskList extends AbstractTaskList {
         return coming;
     }
 
+    @Override
+    public Iterator<Task> iterator(){
+        return new Iterator<Task>() {
+
+            int i = 0;
+
+            @Override
+            public boolean hasNext() {
+                return arrayTasks.length > i;
+            }
+
+            @Override
+            public Task next() {
+                Task task = arrayTasks[i++];
+               return task;
+            }
+        };
+    }
 
 
+    @Override
+    public boolean hasNext() {
+        return false;
+    }
+
+    @Override
+    public Task next() {
+        return null;
+    }
+
+
+    public String toString(){
+        String info = "";
+
+        for(Task task : arrayTasks){
+            if(!(task.isRepeated())){
+                String Title = task.getTitle();
+                int time = task.getTime();
+                boolean active = task.isActive();
+
+                info += String.format("\n Title:%s , Time:%d, Active: %b ", Title, time, active);
+
+            }else{
+                String Title = task.getTitle();
+                int startTime = task.getStartTime();
+                int endTime = task.getEndTime();
+                boolean active = task.isActive();
+
+                info += String.format("\n Title:%s , Start Time:%d, End Time=%d Active: %b ", Title, startTime, endTime, active);
+
+            }
+
+        }
+
+
+        return info;
+    }
+
+    public void copyTask(int i){
+        Task task = this.getTask(i);
+        this.add(task);
+
+    }
+
+    public Task[] copyList(){
+        Task[] arrayTasks2 = new Task[0];
+        arrayTasks2 = Arrays.copyOf(arrayTasks, arrayTasks.length);
+        return arrayTasks2;
+    }
 
 
 }

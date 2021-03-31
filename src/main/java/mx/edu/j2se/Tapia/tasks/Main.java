@@ -1,6 +1,7 @@
 package mx.edu.j2se.Tapia.tasks;
 
 import java.lang.reflect.Array;
+import java.util.Iterator;
 import java.util.List;
 
 public class Main {
@@ -20,9 +21,16 @@ public class Main {
 		list.add(task2);
 		list.add(task3);
 		list.add(task4);
-		AbstractTaskList come = list.incoming(20,100);
-		System.out.println(come.getTask(1).getTitle());
-*/
+
+		System.out.println(list.toString());
+		/*Iterator<Task> it2 = list.iterator();
+
+		System.out.println("LinkedList elements:");
+
+		while(it2.hasNext()){
+			System.out.println(it2.next().getTitle());
+		}*/
+
 
 		LinkedTaskList list2 = new LinkedTaskList();
 
@@ -30,15 +38,17 @@ public class Main {
 		list2.add(task2);
 		list2.add(task3);
 		list2.add(task4);
+		System.out.println(list2.getSize());
 
-		System.out.println(list2.getTask(4).getTitle());
+		list2.copyTask(3);
 
-		list2.incoming(20,100);
 
-		//list2.remove(task2);
-		//Task tarea1 = list2.getTask(2);
-		//System.out.println(tarea1.getTitle());
+		//System.out.println(list2.toString());
 
+
+
+
+		//list2.add(task4);
 
 
 	}
