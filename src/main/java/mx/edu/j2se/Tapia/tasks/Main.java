@@ -3,6 +3,7 @@ package mx.edu.j2se.Tapia.tasks;
 import java.lang.reflect.Array;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Main {
 
@@ -38,10 +39,16 @@ public class Main {
 		list2.add(task2);
 		list2.add(task3);
 		list2.add(task4);
-		System.out.println(list2.getSize());
+		//System.out.println(list2.getSize());
 
-		list2.copyTask(3);
+		//list2.copyTask(3);
+		System.out.println(list2.toString());
 
+
+
+        list2.incoming(60, 100).forEach(element-> System.out.println(element.getTitle()));
+
+        //System.out.println(list2.incoming(50,100).count());
 
 		//System.out.println(list2.toString());
 

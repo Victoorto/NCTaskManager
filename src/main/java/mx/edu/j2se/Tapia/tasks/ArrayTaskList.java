@@ -2,9 +2,9 @@ package mx.edu.j2se.Tapia.tasks;
 
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.function.Consumer;
+import java.util.stream.Stream;
 
-public  class ArrayTaskList extends AbstractTaskList {
+public class ArrayTaskList extends AbstractTaskList {
 
     Task[] arrayTasks = new Task[0];
     Task[] arrayTasksNext = new Task[0];
@@ -65,7 +65,7 @@ public  class ArrayTaskList extends AbstractTaskList {
 
         return elim;
     }
-    public AbstractTaskList incoming(int from, int to){
+   /* public AbstractTaskList incoming(int from, int to){
 
         ArrayTaskList coming = new ArrayTaskList();
 
@@ -85,7 +85,7 @@ public  class ArrayTaskList extends AbstractTaskList {
 
 
         return coming;
-    }
+    }*/
 
     @Override
     public Iterator<Task> iterator(){
@@ -151,11 +151,30 @@ public  class ArrayTaskList extends AbstractTaskList {
 
     }
 
-    public Task[] copyList(){
-        Task[] arrayTasks2 = new Task[0];
-        arrayTasks2 = Arrays.copyOf(arrayTasks, arrayTasks.length);
-        return arrayTasks2;
+    public AbstractTaskList copyList(){
+
+        ArrayTaskList copy = new ArrayTaskList();
+
+        for(Task task: arrayTasks){
+            copy.add(task);
+        }
+
+        return copy;
     }
 
+    @Override
+    public Stream<Task> getStream() {
+
+        Stream.Builder<Task> streamTask = Stream.builder();
+
+        for(Task task: arrayTasks){
+            streamTask.accept(task);
+        }
+
+        Stream<Task> streamTask2 = streamTask.build();
+
+
+        return streamTask2;
+    }
 
 }

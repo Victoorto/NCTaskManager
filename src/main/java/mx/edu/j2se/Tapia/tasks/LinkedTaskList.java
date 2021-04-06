@@ -1,8 +1,10 @@
 package mx.edu.j2se.Tapia.tasks;
 
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 //import java.util.LinkedList;
 public  class LinkedTaskList extends AbstractTaskList {
@@ -76,7 +78,7 @@ public  class LinkedTaskList extends AbstractTaskList {
         return true;
 
     }
-
+/*
     public AbstractTaskList  incoming(int from, int to) {
 
         Node temp = head;
@@ -99,6 +101,7 @@ public  class LinkedTaskList extends AbstractTaskList {
 
         return list2;
     }
+*/
 
     @Override
     public Iterator<Task> iterator(){
@@ -185,7 +188,7 @@ public  class LinkedTaskList extends AbstractTaskList {
 
     }
 
-    public LinkedTaskList copyList(){
+    public AbstractTaskList copyList(){
 
         LinkedTaskList copy = new LinkedTaskList();
         Node ori = this.head;
@@ -195,6 +198,23 @@ public  class LinkedTaskList extends AbstractTaskList {
             ori = ori.next;
         }
         return copy;
+    }
+
+    @Override
+    public Stream<Task> getStream() {
+
+        Stream.Builder<Task> streamTask = Stream.builder();
+        Node ori = this.head;
+
+        while(ori != null){
+            streamTask.accept(ori.data);
+            ori = ori.next;
+        }
+
+        Stream<Task> streamTask2 = streamTask.build();
+
+
+        return streamTask2;
     }
 
 
