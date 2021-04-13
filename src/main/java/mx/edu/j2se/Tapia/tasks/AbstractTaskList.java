@@ -1,6 +1,8 @@
 package mx.edu.j2se.Tapia.tasks;
 
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
@@ -36,27 +38,40 @@ public abstract class AbstractTaskList implements Iterator<Task> {
         };
     }
 
-    public Stream<Task> incoming(int from, int to){
+    public Stream<Task> incoming(String from, String to){
 
-        //Implement better logic
 
-        /*
-           inicio
-           fin
-           intervalo
-           Intervalos-______________-______________-______________-______________-
-               Inicio-------------------------------------------------------------Fin
-                                     Desde-------------------------Hasta
+        return getStream().filter(element -> {
 
-           si inicio = Desde  entra *
-           si fin = Hasta     entra  *
-           Si desde < inicio + intervalo(n) < Hasta entra (Donde n va desde 0 hasta el numero de intervalo)
-           desde
-           hasta
-           .forEach(element -> int n = (element.getStartTime - element.getEndTime)/element.getInterval())
-           .filter(((from<=element.getStartTime())&&(element.getStartTime()<to)||((from < element.getEndTime()) && (element.getEndTime()<= to)))  )
-         */
-        return  getStream().filter(element -> ((from<=element.getStartTime())&&(element.getStartTime()<=to)||(from <= (element.getStartTime() + element.getInterval()))&&((element.getStartTime() + element.getInterval()) <=to)||((from <= element.getEndTime()) && (element.getEndTime()<= to))));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime from1 = LocalDateTime.parse(from, formatter);
+            LocalDateTime to1 = LocalDateTime.parse(to, formatter);
+            LocalDateTime start = element.getStartTime();
+            LocalDateTime end = element.getEndTime();
+
+
+            if(element.interDays == 0 && element.interDays ==0 && element.interMinute == 0){
+                if(start.isAfter(from1) && start.isBefore(to1)){
+                    return true;
+                }else{
+                    return false;}
+            }else{
+
+            while(start.isBefore(end)){
+
+                start = start.plusDays(element.interDays);
+                start = start.plusHours(element.interHours);
+                start = start.plusMinutes(element.interMinute);
+
+                if(start.isAfter(from1) && start.isBefore(to1)){
+                    return true;
+                }
+
+
+            }
+
+            return false;
+        }});
 
     }
 

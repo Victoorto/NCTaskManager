@@ -1,37 +1,45 @@
 package mx.edu.j2se.Tapia.tasks;
 
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Task {
 
     String title;
-    int time, start, end, interval;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    LocalDateTime time, start, end;
+
+    int interDays, interHours, interMinute;
     boolean active, repeated;
 
     //NullPointerException is a run-time exception which is not recommended to catch it, but instead avoid it:
+
     public String getTitle(){
 
         return this.title;
 
     }
 
-    //getTime y getStartTime son lo mismo, pero el documento requiere las dos
-    public int getTime() {
+
+    public LocalDateTime getTime() {
 
         return repeated ? start : time;
     }
 
-    public int getStartTime() {
+    public LocalDateTime getStartTime() {
 
         return repeated ? start : time;
     }
 
-    public int getEndTime() {
+    public LocalDateTime getEndTime() {
 
         return repeated ? end : time;
     }
 
-    public int getInterval() {
+    public String getIntervals() {
 
-        return repeated ? interval : 0;
+        return repeated ? String.format("Days:%s , Hours:%d, Minutes: %b ", this.interDays, this.interHours, this.interMinute): null;
     }
 
     public boolean isActive() {
@@ -43,46 +51,51 @@ public class Task {
         this.title = title;
     }
 
-    public void setTime(int time) {
+    public void setTime(String time) {
         if (repeated){
-            this.interval = 0;
-            this.start = 0;
-            this.end = 0;
-            this.time = time;
+            this.interDays = 0;
+            this.interMinute = 0;
+            this.interHours = 0;
+            this.start = LocalDateTime.now();
+            this.end = LocalDateTime.now();
+            this.time = LocalDateTime.parse(time, formatter);;
             setRepeated(false);
         }
         else{
 
-            this.time = time;
+            this.time = LocalDateTime.parse(time, formatter);;
         }
 
     }
-    public void setTime(int start, int end, int interval) {
+    public void setTime(LocalDateTime startTime, LocalDateTime endTime,
+                        int  interDays, int interHours, int interMinute) {
         if (!repeated){
-            this.interval = interval;
-            this.start = start;
-            this.end = end;
-            this.time = 0;
+            setIntervals(interDays, interHours, interMinute);
+            this.start = startTime;
+            this.end = endTime;
+            this.time = LocalDateTime.now();
             setRepeated(true);
         }else{
 
-            this.interval = interval;
-            this.start = start;
-            this.end = end;
+            setIntervals(interDays, interHours, interMinute);
+            this.start = startTime;
+            this.end = endTime;
         }
 
     }
 
-    public void setStart(int start) {
-        this.start = start;
+    public void setStart(LocalDateTime startTime) {
+        this.start =  startTime;;
     }
 
-    public void setEnd(int end) {
-        this.end = end;
+    public void setEnd(LocalDateTime endTime) {
+        this.end = endTime;
     }
 
-    public void setInterval(int interval) {
-        this.interval = interval;
+    public void setIntervals(int  interDays, int interHours, int interMinute) {
+        this.interDays  = interDays ;
+        this.interHours = interHours;
+        this.interMinute = interMinute;
     }
 
     public void setActive(boolean active) {
@@ -98,59 +111,86 @@ public class Task {
         return repeated;
     }
 
-    public int nextTimeAfter(int current){
-        int nextStart = current + interval;
-        if(nextStart > end){
-            return -1;
+    public LocalDateTime nextTimeAfter(String time){
+        LocalDateTime current =  LocalDateTime.parse(time, formatter);
+
+        if(!isActive() || !isRepeated() || current.isBefore(this.start)|| current.isAfter(this.end)){
+            return null;
         }else{
-            return nextStart;
+
+
+                LocalDateTime start2 = this.start;
+
+
+
+                while(current.isAfter(start2)){
+
+                            start2 = start2.plusDays(this.interDays);
+                            start2 = start2.plusHours(this.interHours);
+                            start2 = start2.plusMinutes(this.interMinute);
+
+
+                }
+
+                return start2;
+
+
+
         }
+
+
     }
 
 
-    /* Constructores */
-    public Task(String title, int time){
-
+    //Constructor no repetitiva
+    public Task(String title, String time){
         try{
-            if(time <= 0 ||  title == null){
+
+            if(title == null){
 
                 throw new IllegalArgumentException();
+
             }
 
             setRepeated(false);
             setTitle(title);
             setTime(time);
+            setRepeated(false);
 
-        }catch(IllegalArgumentException i){
-            System.out.println("El valor tiene que ser positivo");
-            setTitle(null);
-            setTime(0);
+
+            }catch(IllegalArgumentException e){
+            System.out.println("El titulo no puede estar vacio");
+
+            }catch(DateTimeException e) {
+            System.out.println("Los datos no son validos, ingrese datos validos");
         }
 
     }
 
-    public Task(String title, int start, int end, int interval){
+    //Constructor Repetitiva
+    public Task(String title, String startTime, String endTime ,int  interDays, int interHours, int interMinute ){
 
         try{
-            if(start <= 0 || end  <= 0 || end < start || interval <=0 ||  title == null){
 
-                throw new IllegalArgumentException();
+           LocalDateTime end =  LocalDateTime.parse(endTime, formatter);
+           LocalDateTime start =  LocalDateTime.parse(startTime,formatter);
+
+           if(!end.isAfter(start) || interDays < 0 || interMinute < 0 || interHours <0){
+
+               throw new IllegalArgumentException();
             }
-            setRepeated(true);
             setTitle(title);
             setStart(start);
             setEnd(end);
-            setInterval(interval);
+            setIntervals(interDays, interHours, interMinute);
+            setRepeated(true);
 
-        }catch(IllegalArgumentException i){
-            System.out.println("El valor de inicio, final o intervalo no puede ser menor o igual a 0");
-            setRepeated(false);
-            setTitle(null);
-            setStart(0);
-            setEnd(0);
-            setInterval(0);
+        }catch(IllegalArgumentException e){
+            System.out.println("El titulo no puede estar vacio");
+
+        }catch(DateTimeException e) {
+            System.out.println("Los datos no son validos, ingrese datos validos");
         }
-
 
     }
 }

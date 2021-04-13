@@ -1,10 +1,11 @@
 package mx.edu.j2se.Tapia.tasks;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
-public class ArrayTaskList extends AbstractTaskList {
+public  class ArrayTaskList extends AbstractTaskList {
 
     Task[] arrayTasks = new Task[0];
     Task[] arrayTasksNext = new Task[0];
@@ -65,27 +66,6 @@ public class ArrayTaskList extends AbstractTaskList {
 
         return elim;
     }
-   /* public AbstractTaskList incoming(int from, int to){
-
-        ArrayTaskList coming = new ArrayTaskList();
-
-        for(int i =0;i< arrayTasks.length;i++){
-
-            int start_int = arrayTasks[i].getStartTime() + arrayTasks[i].getInterval();
-            int start =arrayTasks[i].getStartTime();
-            int end = arrayTasks[i].getEndTime();
-
-            if((from<=start)&&(start<=to)||(from <= start_int)&&(start_int <=to)||((from <= start) && (end<= to))){
-
-                coming.add(arrayTasks[i]);
-                System.out.println("Task incoming");
-            }
-
-        }
-
-
-        return coming;
-    }*/
 
     @Override
     public Iterator<Task> iterator(){
@@ -124,15 +104,15 @@ public class ArrayTaskList extends AbstractTaskList {
         for(Task task : arrayTasks){
             if(!(task.isRepeated())){
                 String Title = task.getTitle();
-                int time = task.getTime();
+                LocalDateTime time = task.getTime();
                 boolean active = task.isActive();
 
                 info += String.format("\n Title:%s , Time:%d, Active: %b ", Title, time, active);
 
             }else{
                 String Title = task.getTitle();
-                int startTime = task.getStartTime();
-                int endTime = task.getEndTime();
+                LocalDateTime startTime = task.getStartTime();
+                LocalDateTime endTime = task.getEndTime();
                 boolean active = task.isActive();
 
                 info += String.format("\n Title:%s , Start Time:%d, End Time=%d Active: %b ", Title, startTime, endTime, active);

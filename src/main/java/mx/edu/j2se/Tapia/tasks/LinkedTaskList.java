@@ -1,12 +1,13 @@
 package mx.edu.j2se.Tapia.tasks;
 
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.stream.Stream;
 
-//import java.util.LinkedList;
+//import java.util.LinkedList; remove the abstract
 public  class LinkedTaskList extends AbstractTaskList {
 
 
@@ -78,30 +79,6 @@ public  class LinkedTaskList extends AbstractTaskList {
         return true;
 
     }
-/*
-    public AbstractTaskList  incoming(int from, int to) {
-
-        Node temp = head;
-        //List<Task> list2 = new ArrayList<>();
-        LinkedTaskList list2 = new LinkedTaskList();
-        while (temp != null) {
-
-            int start_int = temp.data.getStartTime() + temp.data.getInterval();
-            int start = temp.data.getStartTime();
-            int end = temp.data.getEndTime();
-
-            if ((from <= start_int) && (start_int <= to) || ((from <= start) && (end <= to))) {
-
-                list2.add(temp.data);
-                System.out.println("Task incoming");
-            }
-
-            temp = temp.next;
-        }
-
-        return list2;
-    }
-*/
 
     @Override
     public Iterator<Task> iterator(){
@@ -159,15 +136,15 @@ public  class LinkedTaskList extends AbstractTaskList {
         while(temp != null){
             if(!(temp.data.isRepeated())){
                 String Title = temp.data.getTitle();
-                int time = temp.data.getTime();
+                LocalDateTime time = temp.data.getTime();
                 boolean active = temp.data.isActive();
 
                 info += String.format("\n Title:%s , Time:%d, Active: %b ", Title, time, active);
 
             }else{
                 String Title = temp.data.getTitle();
-                int startTime = temp.data.getStartTime();
-                int endTime = temp.data.getEndTime();
+                LocalDateTime startTime = temp.data.getStartTime();
+                LocalDateTime endTime = temp.data.getEndTime();
                 boolean active = temp.data.isActive();
 
                 info += String.format("\n Title:%s , Start Time:%d, End Time=%d Active: %b ", Title, startTime, endTime, active);
